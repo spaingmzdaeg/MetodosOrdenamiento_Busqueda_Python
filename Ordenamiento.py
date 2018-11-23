@@ -90,8 +90,61 @@ class Ordenamiento:
         print("Cantidad intercambios:" + str(intercambios))
         print("Tiempo de ejecucion:" + str(tiempoEjecucion) + " ms ")
 
+    def insercion(self,unaLista):
+        intercambios=0
+        pasadas=0
+        comparaciones=0
+        tiempoInicial = time()
+        for indice in range(1, len(unaLista)):
+            comparaciones=comparaciones+1
 
-#este metodo es opcional
+            valorActual = unaLista[indice]
+            posicion = indice
+
+            while posicion > 0 and unaLista[posicion - 1] > valorActual:
+                intercambios=intercambios+1
+                unaLista[posicion] = unaLista[posicion - 1]
+                posicion = posicion - 1
+            pasadas=pasadas+1
+
+            unaLista[posicion] = valorActual
+        tiempoFinal = time()
+        tiempoEjecucion = tiempoFinal - tiempoInicial
+        print(unaLista)
+        print("Cantidad Pasadas:" + str(pasadas))
+        print("Cantidad comparaciones:" + str(comparaciones))
+        print("Cantidad intercambios:" + str(intercambios))
+        print("Tiempo de ejecucion:" + str(tiempoEjecucion) + " ms ")
+
+    def seleccion(self,unaLista):
+        intercambios = 0
+        pasadas = 0
+        comparaciones = 0
+        tiempoInicial = time()
+        for llenarRanura in range(len(unaLista) - 1, 0, -1):
+            posicionDelMayor = 0
+            for ubicacion in range(1, llenarRanura + 1):
+                comparaciones=comparaciones+1
+                if unaLista[ubicacion] > unaLista[posicionDelMayor]:
+                    posicionDelMayor = ubicacion
+                pasadas=pasadas+1
+            intercambios = intercambios + 1
+
+            temp = unaLista[llenarRanura]
+            unaLista[llenarRanura] = unaLista[posicionDelMayor]
+            unaLista[posicionDelMayor] = temp
+
+        tiempoFinal = time()
+        tiempoEjecucion = tiempoFinal - tiempoInicial
+        print(unaLista)
+        print("Cantidad Pasadas:" + str(pasadas))
+        print("Cantidad comparaciones:" + str(comparaciones))
+        print("Cantidad intercambios:" + str(intercambios))
+        print("Tiempo de ejecucion:" + str(tiempoEjecucion) + " ms ")
+
+
+
+    #este metodo es opcional
     def mostrarLista(self,Lista,tam):
         for i in range(0,tam):
             print ("["+str(Lista[i])+"]")
@@ -111,7 +164,7 @@ listaD=llenarLista(1000000)
 obj=Ordenamiento()
 opcion=""
 while(not opcion=="Z"):
-    opcion = input("----Seleccione Algoritmo-----\nA)Burbuja_1\nB)Burbuja_2\nC)Burbuja_3\nZ)Salir").upper()
+    opcion = input("----Seleccione Algoritmo-----\nA)Burbuja_1\nB)Burbuja_2\nC)Burbuja_3\nD)Insercion\nE)Seleccion\nZ)Salir").upper()
     if(opcion == "A"):
         var = input(
             "eliga cantidad de numeros para la prueba de estres...\nA)1000\nB)10,000\nC)100,000\nD)Un Millon").upper()
@@ -193,6 +246,62 @@ while(not opcion=="Z"):
             print(listaAux)
             print("lista ordenada:")
             obj.burbuja3(listaAux)
+    elif opcion == "D":
+        var = input(
+            "eliga cantidad de numeros para la prueba de estres...\nA)1000\nB)10,000\nC)100,000\nD)Un Millon").upper()
+        if var == "A":
+            listaAux = listaA.copy()
+            print("lista desordenada:")
+            print(listaAux)
+            print("lista ordenada:")
+            obj.insercion(listaAux)
+        elif var == "B":
+            listaAux = listaB.copy()
+            print("lista desordenada:")
+            print(listaAux)
+            print("lista ordenada:")
+            obj.insercion(listaAux)
+        elif var == "C":
+            listaAux = listaC.copy()
+            print("lista desordenada:")
+            print(listaAux)
+            print("lista ordenada:")
+            obj.insercion(listaAux)
+        elif var == "D":
+            listaAux = listaD.copy()
+            print("lista desordenada:")
+            print(listaAux)
+            print("lista ordenada:")
+            obj.insercion(listaAux)
+    elif opcion=="E":
+        var = input(
+            "eliga cantidad de numeros para la prueba de estres...\nA)1000\nB)10,000\nC)100,000\nD)Un Millon").upper()
+        if var == "A":
+            listaAux = listaA.copy()
+            print("lista desordenada:")
+            print(listaAux)
+            print("lista ordenada:")
+            obj.seleccion(listaAux)
+        elif var == "B":
+            listaAux = listaB.copy()
+            print("lista desordenada:")
+            print(listaAux)
+            print("lista ordenada:")
+            obj.seleccion(listaAux)
+        elif var == "C":
+            listaAux = listaC.copy()
+            print("lista desordenada:")
+            print(listaAux)
+            print("lista ordenada:")
+            obj.seleccion(listaAux)
+        elif var == "D":
+            listaAux = listaD.copy()
+            print("lista desordenada:")
+            print(listaAux)
+            print("lista ordenada:")
+            obj.seleccion(listaAux)
+
+
 
 
 
